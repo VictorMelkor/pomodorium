@@ -52,7 +52,7 @@ function criarElementoTarefa(tarefa) {
         }
     }
 
-    imgBotao.setAttribute('src', '/imagens/edit.png')
+    imgBotao.setAttribute('src', './imagens/edit.png')
 
     botao.append(imgBotao)
 
