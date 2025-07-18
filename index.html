@@ -1,19 +1,42 @@
 <!DOCTYPE html>
-<html lang="pt-br" data-contexto="foco">
+<html lang="pt-BR" data-contexto="foco">
 
 <head>
+    <!-- Metadados essenciais -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Pomodorium é um aplicativo de produtividade baseado na técnica Pomodoro. Foque no que importa e descanse com intenção.">
+    <meta name="author" content="Victor Rodrigues">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Pomodorium - Temporizador Pomodoro" />
+    <meta property="og:description" content="Organize seu tempo com ciclos de foco e descanso usando o Pomodorium." />
+    <meta property="og:image" content="https://i.imgur.com/HHBe0ao.png" />
+    <meta property="og:url" content="https://victormelkor.github.io/pomodorium/" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://i.imgur.com/HHBe0ao.png" />
+
+
+    <!-- Título e favicon -->
     <title>Pomodorium</title>
     <link rel="shortcut icon" href="./imagens/favicon.png" type="image/x-icon">
+
+    <!-- Reset CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
         integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Prata&family=Unbounded:wght@200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
+
+    <!-- Estilos -->
     <link rel="stylesheet" href="./styles.css">
 </head>
 
@@ -21,7 +44,8 @@
     <main class="app">
         <header class="app__header">
             <figure class="app__logo-figure">
-                <img class="app__logo-image" src="/imagens/logo2.png" alt="">
+                <a href="index.html"><img class="app__logo-image" src="/imagens/logo2.png"
+                        alt="Logotipo do Pomodorium"></a>
             </figure>
         </header>
         <section class="app__section-banner-container">
@@ -30,7 +54,7 @@
                 <strong class="app__title-strong">chegue no seu melhor agora.</strong>
             </h1>
             <figure class="app__image-figure">
-                <img class="app__image" src="/imagens/foco.png" alt="">
+                <img class="app__image" src="/imagens/foco.png" alt="Ilustração relacionada a foco e produtividade">
             </figure>
         </section>
         <section class="app__section-card-container">
@@ -58,14 +82,12 @@
                         </label>
                     </li>
                     <li class="app__card-list-item">
-                        <label class="app__card-list-label" for="alternar-musica">
-                            Música
-                        </label>
+                        <label class="app__card-list-label" for="alternar-musica">Música</label>
                     </li>
                 </ul>
                 <div class="app__card-primary-button-wrapper">
                     <button id="start-pause" class="app__card-primary-button">
-                        <img class="app__card-primary-butto-icon" src="/imagens/play_arrow.png" alt="">
+                        <img class="app__card-primary-butto-icon" src="/imagens/play_arrow.png" alt="Ícone de iniciar">
                         <span>Começar</span>
                     </button>
                 </div>
@@ -82,18 +104,18 @@
                     <h2 class="app__section-tasks-heading">Lista de tarefas:</h2>
                     <div class="dropdown-container">
                         <button class="app_button-more">
-                            <img src="/imagens/more.svg" alt="">
+                            <img src="/imagens/more.svg" alt="Abrir menu de tarefas">
                         </button>
                         <ul class="app__section-task-header__ul">
                             <li class="app__section-task-header__li">
                                 <button class="app__section-task-header__li__button" id="btn-remover-concluidas">
-                                    <img src="/imagens/check.svg" alt="">
+                                    <img src="/imagens/check.svg" alt="Ícone de concluir">
                                     Limpar tarefas concluídas
                                 </button>
                             </li>
                             <li class="app__section-task-header__li">
                                 <button class="app__section-task-header__li__button" id="btn-remover-todas">
-                                    <img src="/imagens/trash.svg" alt="">
+                                    <img src="/imagens/trash.svg" alt="Ícone de lixeira">
                                     Limpar todas as tarefas
                                 </button>
                             </li>
@@ -103,37 +125,58 @@
                 <ul class="app__section-task-list"></ul>
                 <form class="app__form-add-task hidden" aria-hidden="true">
                     <div class="app__form-field">
-                        <label class="app__form-label">
-                            Adicionando tarefa
-                        </label>
+                        <label class="app__form-label">Adicionando tarefa</label>
                         <textarea required rows="4" class="app__form-textarea"
                             placeholder="No que você está trabalhando?"></textarea>
                     </div>
                     <footer class="app__form-footer">
                         <button type="button" class="app__form-footer__button app__form-footer__button--delete">
-                            <img src="/imagens/delete.png" alt=""> Deletar
+                            <img src="/imagens/delete.png" alt="Ícone de deletar"> Deletar
                         </button>
                         <div class="splitter"></div>
                         <button type="button" class="app__form-footer__button app__form-footer__button--cancel">
-                            <img src="/imagens/close.png" alt=""> Cancelar
+                            <img src="/imagens/close.png" alt="Ícone de cancelar"> Cancelar
                         </button>
                         <button class="app__form-footer__button app__form-footer__button--confirm">
-                            <img src="/imagens/save.png" alt=""> Salvar
+                            <img src="/imagens/save.png" alt="Ícone de salvar"> Salvar
                         </button>
                     </footer>
                 </form>
                 <button class="app__button--add-task">
-                    <img src="/imagens/add_circle.png" alt=""> Adicionar nova tarefa
+                    <img src="/imagens/add_circle.png" alt="Ícone de adicionar tarefa"> Adicionar nova tarefa
                 </button>
             </div>
         </section>
-
-        <footer class="app__footer">
-            <p class="app__footer-text">
-                Projeto fictício e sem fins comerciais. Imagens geradas por IA no Adobe Firefly.Desenvolvido por Alura.
-            </p>
-        </footer>
     </main>
+
+    <footer class="footer">
+        <ul class="footer-lista">
+            <li><a href="sobre.html" class="footer-lista-item">Sobre</a></li>
+            <li><a href="guia.html" class="footer-lista-item">Como usar</a></li>
+            <li><a href="pomodoro.html" class="footer-lista-item">Método Pomodoro</a></li>
+        </ul>
+        <div class="footer__container">
+            <img src="imagens/logo2.png" alt="Logo Pomodorium no rodapé">
+            <p class="footer-lista-item">Foque no que importa, descanse com intenção.</p>
+        </div>
+    </footer>
+
+    <div class="footer__contato">
+        <article class="footer__contato-item">
+            <p>&copy; 2025 Pomodorium. Projeto open-source.</p>
+            <p>Desenvolvido por <strong>Victor Rodrigues.</strong></p>
+        </article>
+        <article class="footer__contato-imagem">
+            <a href="https://victormelkor.github.io/"><img src="imagens/cv.png" alt="Portfólio pessoal de Victor"
+                    target="_blank"></a>
+            <a href="https://www.linkedin.com/in/victormelkor/"><img src="imagens/linkedin.png" alt="Perfil no LinkedIn"
+                    target="_blank"></a>
+            <a href="https://github.com/VictorMelkor"><img src="imagens/social.png" alt="GitHub VictorMelkor"
+                    target="_blank"></a>
+            <a href="https://www.instagram.com/victormelkor/"><img src="imagens/instagram.png"
+                    alt="Instagram VictorMelkor" target="_blank"></a>
+        </article>
+    </div>
 
     <script src="script.js"></script>
     <script src="script-crud.js"></script>

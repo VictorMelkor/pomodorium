@@ -3,11 +3,11 @@
     --color-secondary: #FFF;
     --azul-royal: #144480;
     --fundo-card-timer: rgba(20, 68, 128, 0.30);
-    --lils: #B872FF;
+    --lils: #4566a0;
     --linear-botes: linear-gradient(180deg, #B872FF 0%, #144480 100%);
-    --azul-profundo: #01080E;
+    --azul-profundo: #a05383;
     --fundo-card: rgba(255, 255, 255, 0.50);
-    --fundo-card-concludo: rgba(0, 244, 191, 0.40);
+    --fundo-card-concludo: #4566a0;
 
     /* Cores base do layout */
     --main-bg-color: linear-gradient(180deg, #123456 0%, #0b0c10 100%);
@@ -20,34 +20,38 @@
 }
 
 [data-contexto="foco"] {
-    --main-bg-color: linear-gradient(180deg, #D72638 0%, #2C001E 48.44%, #0B0C10 100%);
-    --text-primary: #FFD6DC;
-    --text-secondary: #FF6B6B;
-    --btn-bg: linear-gradient(180deg, #FF4E50 0%, #F9D423 100%);
-    --card-bg: rgba(215, 38, 56, 0.3);
-    --card-border: #D72638;
-    --card-bg-complete: rgba(255, 107, 107, 0.4);
+    background: linear-gradient(180deg, #ffd9d0, #ececfb);
+    --text-primary: #3c486b; /* vinho suave */
+    --text-secondary: #7286a0; /* vermelho mais fechado */
+    --btn-bg: linear-gradient(180deg, #ffb3b3 0%, #ff8e8e 100%);
+    --card-bg: rgba(255, 179, 179, 0.3);
+    --card-border: #ff8e8e;
+    --card-bg-complete: #4566a0;
+    --timer: #6c1f1f;
 }
 
 [data-contexto="descanso-curto"] {
-    --main-bg-color: linear-gradient(180deg, #30C780 0%, #104D3F 48.44%, #0B0C10 100%);
-    --text-primary: #D6F5E4;
-    --text-secondary: #2ED47A;
-    --btn-bg: linear-gradient(180deg, #30C780 0%, #104D3F 100%);
-    --card-bg: rgba(48, 199, 128, 0.3);
-    --card-border: #30C780;
-    --card-bg-complete: rgba(46, 212, 122, 0.4);
+    --main-bg-color: linear-gradient(180deg, #bad2df, #ffd9d0);
+    --text-primary: #255957; /* verde-azulado escuro */
+    --text-secondary: #3e7c75; /* tom médio */
+    --btn-bg: linear-gradient(180deg, #a8e6cf 0%, #70c1b3 100%);
+    --card-bg: rgba(168, 230, 207, 0.3);
+    --card-border: #70c1b3;
+    --card-bg-complete: #4566a0;
+    --timer: #255957;
 }
 
 [data-contexto="descanso-longo"] {
-    --main-bg-color: linear-gradient(180deg, #00BFFF 0%, #103C58 48.44%, #0B0C10 100%);
-    --text-primary: #D6EEFF;
-    --text-secondary: #3BBFFF;
-    --btn-bg: linear-gradient(180deg, #00BFFF 0%, #103C58 100%);
-    --card-bg: rgba(0, 191, 255, 0.3);
-    --card-border: #00BFFF;
-    --card-bg-complete: rgba(59, 191, 255, 0.4);
+    --main-bg-color: linear-gradient(180deg, #ececfb, #f9f9ff);
+    --text-primary: #3c486b; /* azul profundo suave */
+    --text-secondary: #7286a0;
+    --btn-bg: linear-gradient(180deg, #d1d5f0 0%, #a0b4e3 100%);
+    --card-bg: rgba(161, 174, 226, 0.3);
+    --card-border: #a0b4e3;
+    --card-bg-complete: #4566a0;
+    --timer: #3c486b;
 }
+
 
 * {
     box-sizing: border-box;
@@ -62,10 +66,22 @@ html {
 
 body {
     min-height: 100vh;
+    position: relative;
+    z-index: 0;
+    
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     background: url("/imagens/pattern.png");
     background-size: cover;
     background-repeat: no-repeat;
+    opacity: 0.3; /* aqui você controla */
+    z-index: -1;
 }
+
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Unbounded', cursive;
@@ -86,6 +102,10 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     gap: 4rem;
     flex-wrap: wrap;
+}
+
+.description {
+    padding-bottom: 4em;
 }
 
 .app__title {
@@ -147,7 +167,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .app__card-timer {
-    color: var(--text-primary);
+    color: var(--timer);
     text-align: center;
     font-family: Unbounded;
     font-size: 12rem;
@@ -189,16 +209,26 @@ h1, h2, h3, h4, h5, h6 {
     gap: 1rem;
 }
 
-.app__footer {
+.footer {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     padding: 2.8rem 6rem;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     background: #010B15;
 }
 
-.app__footer-text {
+.footer-lista-item {
+    flex: 1 1 200px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    font-family: 'Unbounded', cursive;
+    
+}
+
+.footer-text {
     color: rgba(182, 182, 182, 0.8);
     text-align: center;
     font-family: Montserrat;
@@ -207,6 +237,51 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
     line-height: 150%;
 }
+
+.footer-lista {
+    display: block;
+    padding: 1em;
+}
+
+.footer__container {
+    text-align: center;
+}
+
+.footer__container img {
+    width: 50%;
+    height: auto;
+}
+
+.footer-lista > li {
+    padding: 1em 0;
+}
+
+.footer__contato {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 1.4rem 6rem;
+    justify-content: space-around;
+    align-items: center;
+    background: #03182e;
+}
+
+.footer__contato-item {
+        color: rgba(182, 182, 182, 0.8);
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+.footer__contato-imagem img {
+    padding: 0 .5em;
+    opacity: 0.3;
+}
+
+
 
 /* toggle */
 .toggle {
@@ -246,7 +321,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .toggle-checkbox:checked + .toggle-switch {
-    background: var(--lils);
+    background: var(--color-primary);
 }
 
 .toggle-checkbox:checked + .toggle-switch:before {
@@ -301,12 +376,46 @@ h1, h2, h3, h4, h5, h6 {
     gap: 0.8rem;
 }
 
+.app__description { 
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    text-align: justify;
+    line-height: 2;
+    font-family: 'Unbounded', cursive;
+    margin-bottom: 0;
+}
+
 /* fim - dropdown */
+
+.btn-voltar {
+    position: fixed;
+    top: 18rem;
+    left: 5rem;
+    padding: 0.5rem 1rem;
+    background: var(--btn-bg, #B872FF);
+    color: white;
+    font-weight: bold;
+    font-size: 2em;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+}
+
+.btn-voltar:hover {
+    background: var(--lils);
+}
 
 /* Para Celulares */
 @media (max-width: 767px) {
     .app__section-banner-container {
         width: 32rem;
+    }
+
+    .btn-voltar {
+        display: none;
     }
 
     .app__title {
@@ -361,9 +470,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .app__section-active-task-description {
     font-family: Montserrat;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 150%;
     color: var(--text-primary);
 }
@@ -393,16 +502,16 @@ h1, h2, h3, h4, h5, h6 {
 
 .app__section-active-task-label {
     font-family: Montserrat;
-    font-size: 1.25rem;
+    font-size: 2.25rem;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 150%;
     color: var(--text-secondary);
 }
 
 .app__section-task-list {
     margin-top: 2.4rem;
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
 }
 
 .app__section-task-list-item {
@@ -416,6 +525,8 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1.6rem;
     box-sizing: border-box;
     cursor: pointer;
+    
+    
 }
 
 .app__section-task-list-item-description {
@@ -425,7 +536,7 @@ h1, h2, h3, h4, h5, h6 {
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
-    color: var(--azul-profundo);
+    color: var(--color-secondary);
     font-family: Montserrat;
 }
 
@@ -522,6 +633,7 @@ h1, h2, h3, h4, h5, h6 {
     border: 0.2rem solid var(--lils);
     width: 100%;
     margin-top: 4rem;
+    margin-bottom: 4rem;
     padding: 1.8rem;
     font-size: 1.8rem;
     font-style: normal;
@@ -535,17 +647,12 @@ h1, h2, h3, h4, h5, h6 {
     cursor: not-allowed;
 }
 
-/* Para Tablets */
-@media (max-width: 1024px) and (min-width: 768px) {
-    .app__section-banner-container {
-        width: 48rem;
-    }
-}
 
 /* Para Celulares */
 @media (max-width: 767px) {
     .app__section-banner-container {
         width: 32rem;
+        text-align: center;
     }
 
     .app__title {
@@ -555,4 +662,37 @@ h1, h2, h3, h4, h5, h6 {
     .app__card-timer {
         font-size: 6rem;
     }
+
+    .footer-lista {
+        text-align: center;
+    }
+
+    .footer__contato-item {
+        font-size: 1.4em;
+        padding-bottom: 1em;
+    }
+
+    .footer__contato-imagem {
+        padding: 1em;
+    }
 }
+
+/* Para Tablets */
+@media (max-width: 1024px) and (min-width: 768px) {
+    .app__section-banner-container {
+        width: 48rem;
+        text-align: center;
+    }
+
+        .footer {
+        flex-direction: column;
+    }
+
+        .footer-lista {
+        text-align: center;
+    }
+}
+
+
+
+
