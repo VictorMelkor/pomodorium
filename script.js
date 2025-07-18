@@ -40,7 +40,7 @@ curtoBtn.addEventListener("click", () => {
     tempoDecorridoEmSegundos = 300
     alterarContexto('descanso-curto')
     curtoBtn.classList.add('active')
-    
+
 })
 
 longoBtn.addEventListener("click", () => {
@@ -59,24 +59,25 @@ function alterarContexto(contexto) {
     switch (contexto) {
         case "foco":
             titulo.innerHTML = `
-            Otimize sua produtividade,<br>
-                <strong class="app__title-strong">mergulhe no que importa.</strong>
-            `
+    Energia total ativada,<br>
+        <strong class="app__title-strong">chegue no seu melhor agora.</strong>
+    `
             break;
 
         case "descanso-curto":
             titulo.innerHTML = `
-            Que tal dar uma respirada?<br>
-                <strong class="app__title-strong">Faça uma pausa curta</strong>
-            `
+    Respire fundo e recarregue,<br>
+        <strong class="app__title-strong">pausa rápida, mente afiada.</strong>
+    `
             break;
 
-        case "descanso-longo": 
-        titulo.innerHTML = `
-        Hora de voltar à superfície!<br>
-                <strong class="app__title-strong">Faça uma pausa longa.</strong>
-        `
+        case "descanso-longo":
+            titulo.innerHTML = `
+    Pause para resetar,<br>
+        <strong class="app__title-strong">uma pausa longa para renascer.</strong>
+    `
             break;
+
 
         default:
             break;
@@ -87,12 +88,17 @@ const contagemRegressiva = () => {
     if (tempoDecorridoEmSegundos <= 0) {
         somBeep.play();
         alert('Tempo Finalizado!')
+        const focoAtivo = html.getAttribute('data-contexto') == 'foco'
+        if (focoAtivo) {
+            const evento = new CustomEvent('focoFinalizado')
+            document.dispatchEvent(evento)
+        }
         zerar()
         return
     }
     tempoDecorridoEmSegundos -= 1
     mostrarTempo()
-    
+
 }
 
 startPauseBtn.addEventListener("click", iniciarOuPausar);
@@ -111,14 +117,14 @@ function iniciarOuPausar() {
 
 function zerar() {
     clearInterval(intervaloId);
-    intervaloId = null; 
+    intervaloId = null;
     iniciarOuPausarBtn.textContent = 'Começar'
     startOuPauseImg.setAttribute('src', '/imagens/play_arrow.png')
 }
 
 function mostrarTempo() {
     const tempo = new Date(tempoDecorridoEmSegundos * 1000)
-    const tempoFormatado = tempo.toLocaleString('pt-Br', {minute: '2-digit', second: '2-digit'})
+    const tempoFormatado = tempo.toLocaleString('pt-Br', { minute: '2-digit', second: '2-digit' })
     timer.innerHTML = `${tempoFormatado}`
 }
 
