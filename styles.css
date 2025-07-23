@@ -75,7 +75,7 @@ body::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: url("/imagens/pattern.png");
+    background: url("./imagens/pattern.png");
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.3; /* aqui você controla */
