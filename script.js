@@ -17,17 +17,17 @@ const timer = document.querySelector('#timer');
 
 let tempoDecorridoEmSegundos = 1500;
 let intervaloId = null;
-let inicio = null;
-let fim = null;
+let tempoFinal = null; // 🔥 Armazena o horário exato de término
 
 musica.loop = true;
 
+// 🔔 Solicita permissão para notificações ao carregar a página
+if ("Notification" in window) {
+    Notification.requestPermission();
+}
+
 musicaFocoInput.addEventListener('change', () => {
-    if (musica.paused) {
-        musica.play();
-    } else {
-        musica.pause();
-    }
+    musica.paused ? musica.play() : musica.pause();
 });
 
 focoBtn.addEventListener("click", () => {
@@ -49,53 +49,41 @@ longoBtn.addEventListener("click", () => {
 });
 
 function alterarContexto(contexto) {
-    mostrarTempo(tempoDecorridoEmSegundos);
+    mostrarTempo();
     botoes.forEach(btn => btn.classList.remove('active'));
     html.setAttribute('data-contexto', contexto);
     banner.setAttribute('src', `./imagens/${contexto}.png`);
     switch (contexto) {
         case "foco":
-            titulo.innerHTML = `
-                Energia total ativada,<br>
-                <strong class="app__title-strong">chegue no seu melhor agora.</strong>
-            `;
+            titulo.innerHTML = `Energia total ativada,<br><strong class="app__title-strong">chegue no seu melhor agora.</strong>`;
             break;
-
         case "descanso-curto":
-            titulo.innerHTML = `
-                Respire fundo e recarregue,<br>
-                <strong class="app__title-strong">pausa rápida, mente afiada.</strong>
-            `;
+            titulo.innerHTML = `Respire fundo e recarregue,<br><strong class="app__title-strong">pausa rápida, mente afiada.</strong>`;
             break;
-
         case "descanso-longo":
-            titulo.innerHTML = `
-                Pause para resetar,<br>
-                <strong class="app__title-strong">uma pausa longa para renascer.</strong>
-            `;
+            titulo.innerHTML = `Pause para resetar,<br><strong class="app__title-strong">uma pausa longa para renascer.</strong>`;
             break;
     }
 }
 
+// 🔥 Nova contagem que usa o relógio do sistema
 const contagemRegressiva = () => {
     const agora = Date.now();
-    const restante = Math.max(0, Math.round((fim - agora) / 1000));
+    const restante = Math.max(0, Math.floor((tempoFinal - agora) / 1000));
 
-    mostrarTempo(restante);
+    tempoDecorridoEmSegundos = restante;
+    mostrarTempo();
 
     if (restante <= 0) {
-        clearInterval(intervaloId);
-        intervaloId = null;
         somBeep.play();
+        enviarNotificacao("⏳ Tempo Finalizado!", "Seu ciclo foi concluído com sucesso.");
         setTimeout(() => alert('Tempo Finalizado!'), 500);
 
-        if (html.getAttribute('data-contexto') === 'foco') {
-            const evento = new CustomEvent('focoFinalizado');
-            document.dispatchEvent(evento);
+        const focoAtivo = html.getAttribute('data-contexto') === 'foco';
+        if (focoAtivo) {
+            document.dispatchEvent(new CustomEvent('focoFinalizado'));
         }
-
-        iniciarOuPausarBtn.textContent = 'Começar';
-        startOuPauseImg.setAttribute('src', './imagens/play_arrow.png');
+        zerar();
     }
 };
 
@@ -107,10 +95,11 @@ function iniciarOuPausar() {
         zerar();
         return;
     }
-
     somPlay.play();
-    inicio = Date.now();
-    fim = inicio + tempoDecorridoEmSegundos * 1000;
+
+    // 🔥 Define o horário exato que a contagem deve terminar
+    tempoFinal = Date.now() + tempoDecorridoEmSegundos * 1000;
+
     intervaloId = setInterval(contagemRegressiva, 1000);
     iniciarOuPausarBtn.textContent = 'Pausar';
     startOuPauseImg.setAttribute('src', './imagens/pause.png');
@@ -119,19 +108,24 @@ function iniciarOuPausar() {
 function zerar() {
     clearInterval(intervaloId);
     intervaloId = null;
-    // recalcula tempo restante para retomar de onde parou
-    tempoDecorridoEmSegundos = Math.max(0, Math.round((fim - Date.now()) / 1000));
     iniciarOuPausarBtn.textContent = 'Começar';
     startOuPauseImg.setAttribute('src', './imagens/play_arrow.png');
 }
 
-function mostrarTempo(segundos = tempoDecorridoEmSegundos) {
-    const tempo = new Date(segundos * 1000);
-    const tempoFormatado = tempo.toLocaleString('pt-BR', {
-        minute: '2-digit',
-        second: '2-digit'
-    });
+function mostrarTempo() {
+    const tempo = new Date(tempoDecorridoEmSegundos * 1000);
+    const tempoFormatado = tempo.toLocaleString('pt-BR', { minute: '2-digit', second: '2-digit' });
     timer.innerHTML = `${tempoFormatado}`;
+}
+
+// 🔔 Cria uma notificação nativa (somente se permitido)
+function enviarNotificacao(titulo, corpo) {
+    if ("Notification" in window && Notification.permission === "granted") {
+        new Notification(titulo, {
+            body: corpo,
+            icon: "./imagens/foco.png"
+        });
+    }
 }
 
 mostrarTempo();
