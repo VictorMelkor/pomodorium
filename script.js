@@ -9,9 +9,9 @@ const musicaFocoInput = document.querySelector('#alternar-musica');
 const musica = new Audio('./sons/luna-rise-part-one.mp3');
 const iniciarOuPausarBtn = document.querySelector('#start-pause span');
 const startOuPauseImg = document.querySelector('.app__card-primary-butto-icon');
-const somPlay = new Audio('/sons/play.wav');
-const somPause = new Audio('/sons/pause.mp3');
-const somBeep = new Audio('/sons/beep.mp3');
+const somPlay = new Audio('./sons/play.wav');
+const somPause = new Audio('./sons/pause.mp3');
+const somBeep = new Audio('./sons/beep.mp3');
 const startPauseBtn = document.getElementById('start-pause');
 const timer = document.querySelector('#timer');
 
