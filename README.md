@@ -47,6 +47,18 @@ Inspirado na ideia de um “reino de produtividade”, o nome une _Pomodoro_ + _
 
 ---
 
+## 🔔 Novas Funcionalidades
+
+- ⏳ **Contagem Persistente:**  
+  Agora o timer utiliza o relógio do sistema para continuar a contagem mesmo quando o celular está bloqueado ou o usuário sai da aba.  
+
+- 🔔 **Notificação ao Final do Ciclo:**  
+  O usuário recebe uma notificação nativa do navegador informando que o ciclo foi concluído, mesmo que esteja em outra tela.  
+
+Essas melhorias garantem maior confiabilidade e uma experiência de uso mais próxima de aplicativos nativos.
+
+---
+
 ## 🔧 Como rodar o projeto localmente
 
 1. Clone o repositório:
